@@ -8,6 +8,7 @@ export default defineConfig({
   plugins: [
     vue(),
   ],
+  base: '/vite-depoly-sample/',
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
