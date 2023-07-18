@@ -1,6 +1,7 @@
 <template>
   <div class="about">
     <div class="user">
+      <h3>隨機使用者</h3>
       <img :src="user.picture.medium" class="user__img" />
       <div class="user-info">
         <h3 class="user-info__name">{{ user.name.title }} {{ user.name.first }} {{ user.name.last }}</h3>
@@ -48,15 +49,3 @@ export default {
 }
 </script>
 
-<style>
-@media (min-width: 1024px) {
-  .about {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-  }
-  .user__img{
-
-  }
-}
-</style>
