@@ -23,7 +23,7 @@ git commit -m 'deploy'
 # if you are deploying to https://Irissamy.github.io
 # git push -f git@github.com:Irissamy/Irissamy.github.io.git main
 
-# if you are deploying to https://Irissamy.github.io/vite-depoly-sample
- git push -f git@github.com:Irissamy/vite-depoly-sample.git main:gh-pages
+# if you are deploying to https://Irissamy.github.io/vite-pinia
+ git push -f git@github.com:Irissamy/vite-pinia.git main:gh-pages
 
 cd -
