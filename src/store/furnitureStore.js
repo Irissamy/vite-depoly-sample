@@ -17,7 +17,6 @@ export default defineStore('furnitureStore',{
           axios.get(api)
             .then((res) => {
               this.products = res.data.products
-              console.log(res.data)
             })
       }
     }
