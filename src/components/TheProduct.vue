@@ -1,6 +1,6 @@
 <template>
   <div class="row row-cols-3 my-3 g-4">
-    <div class="col" v-for="item in sortProducts" :key="item.id">
+    <div class="col" v-for="item in product" :key="item.id">
       <div class="card">
         <img
           :src="item.imageUrl"
@@ -12,7 +12,7 @@
             {{ item.title }}
             <span class="float-end">$ {{ item.price }}</span>
           </h6>
-          <a href="#" class="btn btn-outline-primary w-100" @click.prevent="addToCart(item.id,item.qty)">加入購物車</a>
+          <a href="#" class="btn btn-outline-primary w-100">加入購物車</a>
         </div>
       </div>
     </div>
@@ -20,18 +20,13 @@
 </template>
 
 <script>
-import productStore from '@/store/productStore';
-import cartStore from '@/store/cartStore';
-import { mapState, mapActions } from 'pinia';
-
 export default {
-  name: 'ProductComponent',
-  computed: {
-    ...mapState(productStore,['sortProducts'])
+  props: {
+    product: {
+      type: Object,
+      default () { return {} }
+    }
   },
-  methods: {
-    ...mapActions(cartStore,['addToCart'])
-  }
 }
 </script>
 

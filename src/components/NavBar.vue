@@ -16,8 +16,8 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">shopping</a>
                         <ul class="dropdown-menu">
-                            <li><RouterLink to="/shopping" class="dropdown-item">甜甜的東西</RouterLink></li>
-                            <li><a class="dropdown-item" href="javascripts:;">舒服的家具</a></li>
+                            <li><RouterLink to="/shopping/sweetItem" class="dropdown-item">甜甜的東西</RouterLink></li>
+                            <li><RouterLink to="/shopping/furnitureItem" class="dropdown-item">舒服的家具</RouterLink></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="javascripts:;">Something else here</a></li>
                         </ul>
@@ -26,8 +26,8 @@
                 <div class="nav-item dropdown pe-3">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Login</a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="javascripts:;">使用者登入</a></li>
-                        <li><a class="dropdown-item" href="javascripts:;">管理者登入</a></li>
+                        <li><RouterLink to="/loginView" class="dropdown-item">使用者登入</RouterLink></li>
+                        <li><RouterLink to="/loginView" class="dropdown-item">管理者登入</RouterLink></li>
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="javascripts:;">login out</a></li>
                     </ul>
