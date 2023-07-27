@@ -35,7 +35,7 @@
                 <div class="d-flex pe-3">
                     <span>ShoppingCart</span>
                     <i class="bi bi-cart3"></i>
-                    <span class="ms-2 badge rounded-pill bg-danger text-white">{{ cartList.length }}</span>
+                    <span class="ms-2 badge rounded-pill bg-danger text-white">{{ getCartList.carts.length }}</span>
                 </div>
             </div>
         </div>
@@ -53,7 +53,7 @@ export default {
         RouterLink
     },
     computed: {
-        ...mapState(cartStore,['cartList'])
+        ...mapState(cartStore,['getCartList'])
     }
 }
 </script>

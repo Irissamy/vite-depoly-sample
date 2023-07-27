@@ -12,7 +12,7 @@
             {{ item.title }}
             <span class="float-end">$ {{ item.price }}</span>
           </h6>
-          <a href="#" class="btn btn-outline-primary w-100">加入購物車</a>
+          <a href="#" class="btn btn-outline-primary w-100" @click.prevent="addToCart(item.id,1)">加入購物車</a>
         </div>
       </div>
     </div>
@@ -20,6 +20,9 @@
 </template>
 
 <script>
+import cartStore from '@/store/cartStore'
+import { mapActions } from 'pinia'
+
 export default {
   props: {
     product: {
@@ -27,6 +30,9 @@ export default {
       default () { return {} }
     }
   },
+  methods: {
+    ...mapActions(cartStore,['addToCart'])
+  }
 }
 </script>
 
