@@ -20,12 +20,12 @@
               <option :value="i" v-for="i in 20" :key="i">{{ i }}</option>
             </select>
           </td>
-          <td width="200" class="text-end">$ {{ item.subTotal }}</td>
+          <td width="200" class="text-end">$ {{ currency(item.subTotal) }}</td>
         </tr>
       </tbody>
       <tfoot>
         <tr>
-          <td colspan="5" class="text-end">總金額 NT${{ getCartList.total }}</td>
+          <td colspan="5" class="text-end">總金額 NT${{ currency(getCartList.total) }}</td>
         </tr>
       </tfoot>
     </table>
@@ -33,9 +33,16 @@
 </template>
 
 <script>
-import cartStore from '@/store/cartStore.js';
-import { mapState, mapActions } from 'pinia';
+import cartStore from '@/store/cartStore.js'
+import { mapState, mapActions } from 'pinia'
+import { currency } from '@/methods/filterFn.js'
+
 export default {
+  data() {
+    return {
+      currency
+    }
+  },
   computed: {
     ...mapState(cartStore,['getCartList'])
   },

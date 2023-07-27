@@ -10,7 +10,7 @@
         <div class="card-body">
           <h6 class="card-title">
             {{ item.title }}
-            <span class="float-end">$ {{ item.price }}</span>
+            <span class="float-end">$ {{ currency(item.price) }}</span>
           </h6>
           <a href="#" class="btn btn-outline-primary w-100" @click.prevent="addToCart(item.id,1)">加入購物車</a>
         </div>
@@ -22,12 +22,18 @@
 <script>
 import cartStore from '@/store/cartStore'
 import { mapActions } from 'pinia'
+import { currency } from '@/methods/filterFn.js'
 
 export default {
   props: {
     product: {
       type: Object,
       default () { return {} }
+    }
+  },
+  data() {
+    return {
+      currency
     }
   },
   methods: {
