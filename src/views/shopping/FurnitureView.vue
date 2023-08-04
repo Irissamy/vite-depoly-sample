@@ -1,14 +1,14 @@
 <template>
     <ProductBanner :banner-image="bannerImage"></ProductBanner>
     <CartComponent></CartComponent>
-    <TheProduct :product="sortProducts"></TheProduct>
+    <TheProduct :product="productList"></TheProduct>
 </template>
 
 <script>
 import ProductBanner from '@/components/ProductBanner.vue'
 import CartComponent from '@/components/CartComponent.vue'
 import TheProduct from '@/components/TheProduct.vue'
-import furnitureStore from '@/store/furnitureStore.js'
+import productStore from '@/store/productStore.js'
 import { mapState,mapActions } from 'pinia'
 
 export default {
@@ -26,10 +26,16 @@ export default {
         }
     },
     computed: {
-        ...mapState(furnitureStore,['sortProducts'])
+        ...mapState(productStore,['sortProducts']),
+        ...mapState(productStore,{
+            products: 'sortProducts',
+            productList() {
+                return this.products.filter(item => item.category === '家具')
+            }
+        })
     },
     methods: {
-        ...mapActions(furnitureStore,['getProductList'])
+        ...mapActions(productStore,['getProductList'])
     },
     created() {
         this.getProductList()

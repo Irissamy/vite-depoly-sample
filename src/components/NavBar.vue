@@ -27,7 +27,7 @@
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Login</a>
                     <ul class="dropdown-menu">
                         <li><RouterLink to="/loginView" class="dropdown-item">使用者登入</RouterLink></li>
-                        <li><RouterLink to="/loginView" class="dropdown-item">管理者登入</RouterLink></li>
+                        <li><a href="https://irissamy.github.io/vite-pinia-admin/#/login" class="dropdown-item">管理者登入</a></li>
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="javascripts:;">login out</a></li>
                     </ul>

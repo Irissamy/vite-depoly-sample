@@ -1,5 +1,4 @@
 import { defineStore } from 'pinia'
-import furnitureStore from '@/store/furnitureStore'
 import productStore from '@/store/productStore'
 
 export default defineStore('cartStore',{
@@ -30,9 +29,7 @@ export default defineStore('cartStore',{
     },
     getters: {
         getCartList: ({cartList}) => {
-            const furnitureProducts = furnitureStore().products
-            const  sweetProducts = productStore().products
-            const products = furnitureProducts.concat(sweetProducts)
+            const products = productStore().products
             const carts = cartList.map(item => {
                 const product = products.find((productItem) => productItem.id === item.productId)
                 return {
