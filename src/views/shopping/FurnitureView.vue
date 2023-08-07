@@ -1,12 +1,10 @@
 <template>
     <ProductBanner :banner-image="bannerImage"></ProductBanner>
-    <CartComponent></CartComponent>
     <TheProduct :product="productList"></TheProduct>
 </template>
 
 <script>
 import ProductBanner from '@/components/ProductBanner.vue'
-import CartComponent from '@/components/CartComponent.vue'
 import TheProduct from '@/components/TheProduct.vue'
 import productStore from '@/store/productStore.js'
 import { mapState,mapActions } from 'pinia'
@@ -14,7 +12,7 @@ import { mapState,mapActions } from 'pinia'
 export default {
     name: 'ShoppingView',
     components:{
-        CartComponent,ProductBanner,TheProduct
+        ProductBanner,TheProduct
     },
     data() {
         return {

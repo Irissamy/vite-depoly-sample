@@ -18,6 +18,8 @@
                         <ul class="dropdown-menu">
                             <li><RouterLink to="/shopping/sweetItem" class="dropdown-item">甜甜的東西</RouterLink></li>
                             <li><RouterLink to="/shopping/furnitureItem" class="dropdown-item">舒服的家具</RouterLink></li>
+                            <li><RouterLink to="/shopping/toyItem" class="dropdown-item">好玩的玩具</RouterLink></li>
+                            <li><RouterLink to="/shopping/beautyItem" class="dropdown-item">美美的彩妝</RouterLink></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="javascripts:;">Something else here</a></li>
                         </ul>
@@ -33,9 +35,14 @@
                     </ul>
                 </div>
                 <div class="d-flex pe-3">
-                    <span>ShoppingCart</span>
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">ShoppingCart</a>
+                    <ul class="dropdown-menu">
+                        <CartComponent></CartComponent>
+                    </ul>
+                    <!-- <span>ShoppingCart</span> -->
                     <i class="bi bi-cart3"></i>
-                    <span class="ms-2 badge rounded-pill bg-danger text-white">{{ getCartList.carts.length }}</span>
+                    <span class="ms-2 badge rounded-pill bg-danger text-white">{{ cartLen }}</span>
+                    
                 </div>
             </div>
         </div>
@@ -43,17 +50,18 @@
 </template>
 
 <script>
-import { RouterLink } from 'vue-router';
-import cartStore from '@/store/cartStore';
-import { mapState } from 'pinia';
+import { RouterLink } from 'vue-router'
+import cartStore from '@/store/cartStore'
+import { mapState } from 'pinia'
+import CartComponent from '@/components/CartComponent.vue'
 
 export default {
     name:'NavBar',
     components: {
-        RouterLink
+        RouterLink,CartComponent
     },
     computed: {
-        ...mapState(cartStore,['getCartList'])
+        ...mapState(cartStore,['cartLen'])
     }
 }
 </script>

@@ -1,48 +1,61 @@
 import { defineStore } from 'pinia'
-import productStore from '@/store/productStore'
+import axios from 'axios'
 
 export default defineStore('cartStore',{
     state: () => ({
-        cartList: []
+        cartList: [],
+        cartLen: 0
     }),
     actions: {
-        addToCart(productId,qty=1) {
-            const currentCart = this.cartList.find((item) => item.productId === productId)
-            if(currentCart){
-                currentCart.qty += qty
-            } else {
-                this.cartList.push({
-                    id: new Date().getTime(),
-                    productId,
-                    qty
-                })
-            }
+        async getCartList(){
+            const api = `${import.meta.env.VITE_APP_API}api/${import.meta.env.VITE_APP_PATH}/cart`
+            await axios.get(api)
+                .then((res) => {
+                this.cartList = res.data.data
+                this.cartLen = this.cartList.carts.length
+            })
         },
-        setCartQty(event,productId){
-            const currentCart = this.cartList.find((item) => item.id === productId)
-            currentCart.qty = event.target.value * 1 
+        addToCart (item) {
+            const api = `${import.meta.env.VITE_APP_API}api/${import.meta.env.VITE_APP_PATH}/cart`
+            const cart = {
+              product_id: item.id,
+              qty: 1
+            }
+            axios.post(api, { data: cart })
+              .then((res) => {
+                if(res.data.success){
+                  this.getCartList()
+                } else {
+                    console.log(res.data.message)
+                }
+              })
+        },
+        changeCartQty(event,productId){
+            const api = `${import.meta.env.VITE_APP_API}api/${import.meta.env.VITE_APP_PATH}/cart/${productId}`
+            const setQty = {
+                product_id: productId,
+                qty: event.target.value * 1
+            }
+            axios.put(api, { data: setQty })
+              .then((res) => {
+                if(res.data.success){
+                  this.getCartList()
+                } else {
+                  console.log(res.data.message)
+                }
+                
+              })
         },
         removeCart(productId){
-            const currentCartIndex = this.cartList.findIndex((item) => item.id === productId)
-            this.cartList.splice(currentCartIndex,1)
-        }
-    },
-    getters: {
-        getCartList: ({cartList}) => {
-            const products = productStore().products
-            const carts = cartList.map(item => {
-                const product = products.find((productItem) => productItem.id === item.productId)
-                return {
-                    ...item,
-                    product,
-                    subTotal: product.price * item.qty
+            const api = `${import.meta.env.VITE_APP_API}api/${import.meta.env.VITE_APP_PATH}/cart/${productId}`
+            axios.delete(api) 
+              .then((res) => {
+                if(res.data.success){
+                    this.getCartList()
+                } else {
+                    console.log(res.data.message)
                 }
-            })
-            const total = carts.reduce((a, b) => a + b.subTotal,0)
-            return {
-                carts,
-                total
-            }
+              })
         }
     }
 })

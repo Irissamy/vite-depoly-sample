@@ -12,7 +12,8 @@
             {{ item.title }}
             <span class="float-end">$ {{ currency(item.price) }}</span>
           </h6>
-          <a href="#" class="btn btn-outline-primary w-100" @click.prevent="addToCart(item.id,1)">加入購物車</a>
+          <a href="#" class="btn btn-outline-secondary w-100 mb-2" @click.prevent="getProductDetail(item)">查看更多</a>
+          <a href="#" class="btn btn-outline-primary w-100" @click.prevent="addToCart(item)">加入購物車</a>
         </div>
       </div>
     </div>
@@ -37,7 +38,10 @@ export default {
     }
   },
   methods: {
-    ...mapActions(cartStore,['addToCart'])
+    ...mapActions(cartStore,['addToCart']),
+    getProductDetail(item) {
+      this.$router.push(`${this.$route.path}/${item.id}`)
+    }
   }
 }
 </script>
@@ -46,5 +50,8 @@ export default {
 .card-img-top {
   object-fit: cover;
   height: 200px;
+}
+.btn-zindex{
+  z-index:1;
 }
 </style>

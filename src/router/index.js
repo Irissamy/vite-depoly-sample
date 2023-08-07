@@ -29,12 +29,25 @@ const router = createRouter({
       children: [
         {
           path: 'sweetItem',
-          component: () => import('../views/shopping/SweetView.vue')
+          component: () => import('../views/shopping/SweetView.vue'),
         },
         {
           path: 'furnitureItem',
           component: () => import('../views/shopping/FurnitureView.vue')
-        }
+        },
+        {
+          path: 'toyItem',
+          component: () => import('../views/shopping/ToyView.vue')
+        },
+        {
+          path: 'beautyItem',
+          component: () => import('../views/shopping/beautyView.vue'),
+        },
+        {
+          path: ':productCategory/:productId',
+          name: 'productDatil',
+          component: () => import('../views/shopping/productView.vue')
+        },
       ]
     }
   ]

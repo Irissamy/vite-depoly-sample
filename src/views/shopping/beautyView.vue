@@ -12,16 +12,15 @@ import { mapState,mapActions } from 'pinia'
 export default {
     name: 'ShoppingView',
     components:{
-        TheProduct,
-        ProductBanner
+        ProductBanner,TheProduct
     },
     data() {
         return {
             bannerImage: [
-                'https://images.unsplash.com/photo-1576717585968-8ea8166b89b8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
-                'https://images.unsplash.com/photo-1612201142855-7873bc1661b4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
-                'https://images.unsplash.com/photo-1606913084603-3e7702b01627?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80'
-            ],
+                'https://www.ikea.com.tw/dairyfarm/tw/pageImages/page__zh_tw_16255370301793770918.jpeg',
+                'https://www.ikea.com.tw/dairyfarm/tw/pageImages/page__zh_tw_15962967350.jpeg',
+                'https://img.ltn.com.tw/Upload/style/page/2022/05/25/220525-20211-1-IRdt2.jpg'
+            ]
         }
     },
     computed: {
@@ -29,9 +28,9 @@ export default {
         ...mapState(productStore,{
             products: 'sortProducts',
             productList() {
-                return this.products.filter(item => item.category === '零食')
+                return this.products.filter(item => item.category === '彩妝')
             }
-        }),
+        })
     },
     methods: {
         ...mapActions(productStore,['getProductList'])
