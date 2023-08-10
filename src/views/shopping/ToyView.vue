@@ -1,6 +1,6 @@
 <template>
     <ProductBanner :banner-image="bannerImage"></ProductBanner>
-    <TheProduct :product="productList"></TheProduct>
+    <TheProduct :product="productList" :loading="isLoading"></TheProduct>
 </template>
 
 <script>
@@ -24,7 +24,7 @@ export default {
         }
     },
     computed: {
-        ...mapState(productStore,['sortProducts']),
+        ...mapState(productStore,['sortProducts','isLoading']),
         ...mapState(productStore,{
             products: 'sortProducts',
             productList() {

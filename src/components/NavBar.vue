@@ -1,11 +1,11 @@
 <template>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <nav class="fixed-top navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">Iris & Amy</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div class="position-relative collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
                         <RouterLink to="/" class="nav-link">Home</RouterLink>
@@ -35,14 +35,14 @@
                     </ul>
                 </div>
                 <div class="d-flex pe-3">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">ShoppingCart</a>
-                    <ul class="dropdown-menu">
-                        <CartComponent></CartComponent>
-                    </ul>
-                    <!-- <span>ShoppingCart</span> -->
+                    <a class="nav-link" href="#" @click.prevent="showCart">購物小車車</a>
+                    <div class="cart" :class="{ 'cart--active': isCartShow }">
+                        <div class="position-relative">
+                            <CartComponent></CartComponent>
+                        </div> 
+                    </div>
                     <i class="bi bi-cart3"></i>
-                    <span class="ms-2 badge rounded-pill bg-danger text-white">{{ cartLen }}</span>
-                    
+                    <a class="ms-2 badge rounded-pill bg-danger text-white" href="#" @click.prevent="showCart">{{ cartLen }}</a>
                 </div>
             </div>
         </div>
@@ -60,8 +60,23 @@ export default {
     components: {
         RouterLink,CartComponent
     },
-    computed: {
-        ...mapState(cartStore,['cartLen'])
+    data() {
+        return {
+            isCartShow: false
+        }
+    },
+    watch: {
+        isShow(){
+            this.isCartShow = this.isShow
+        }
+    },
+    computed: { 
+        ...mapState(cartStore,['cartLen','isShow'])
+    },
+    methods: {
+        showCart() {
+            this.isCartShow = !this.isCartShow
+        }
     }
 }
 </script>

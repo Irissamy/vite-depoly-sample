@@ -1,4 +1,5 @@
 <template>
+  <LoadingOverlay :active="loading"></LoadingOverlay>
   <div class="row row-cols-3 my-3 g-4">
     <div class="col" v-for="item in product" :key="item.id">
       <div class="card">
@@ -30,7 +31,8 @@ export default {
     product: {
       type: Object,
       default () { return {} }
-    }
+    },
+    loading: Boolean
   },
   data() {
     return {
