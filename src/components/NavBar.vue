@@ -41,7 +41,9 @@
                             <CartComponent></CartComponent>
                         </div> 
                     </div>
-                    <i class="bi bi-cart3"></i>
+                    <!-- <i class="bi bi-cart3"></i> -->
+                    <i class="bi bi-cart-dash-fill" v-if="isCartShow"></i>
+                    <i class="bi bi-cart-plus" v-else></i>
                     <a class="ms-2 badge rounded-pill bg-danger text-white" href="#" @click.prevent="showCart">{{ cartLen }}</a>
                 </div>
             </div>
