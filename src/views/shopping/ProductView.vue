@@ -1,5 +1,5 @@
 <template>
-    <!-- <LoadingOverlay :active="isLoading"></LoadingOverlay> -->
+    <LoadingOverlay :active="isLoading"></LoadingOverlay>
     <div class="container">
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">

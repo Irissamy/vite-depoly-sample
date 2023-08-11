@@ -11,6 +11,10 @@ import 'bootstrap-icons/font/bootstrap-icons.css'
 import Loading from 'vue3-loading-overlay'
 // Import vue3-loading-overlay stylesheet
 import 'vue3-loading-overlay/dist/vue3-loading-overlay.css'
+import { Form, Field, ErrorMessage, defineRule, configure } from 'vee-validate'
+import AllRules from '@vee-validate/rules'
+import { localize, setLocale } from '@vee-validate/i18n'
+import zhTW from '@vee-validate/i18n/dist/locale/zh_TW.json'
 import App from './App.vue'
 import router from './router'
 
@@ -19,11 +23,27 @@ import router from './router'
 import * as bootstrap from 'bootstrap'
 const app = createApp(App)
 
+
+Object.keys(AllRules).forEach((rule) => {
+    defineRule(rule, AllRules[rule])
+})
+
+  
+configure({
+    generateMessage: localize({ zh_TW: zhTW }), // 載入繁體中文語系
+    validateOnInput: true // 當輸入任何內容直接進行驗證
+ })
+// 設定預設語系
+setLocale('zh_TW')
+
 app.use(createPinia())
 app.use(VueAxios, axios)
 app.use(router)
 app.use(bootstrap)
 app.component('LoadingOverlay', Loading)
+app.component('V-Form', Form)
+app.component('V-Field', Field)
+app.component('V-ErrorMessage', ErrorMessage)
 app.config.globalProperties.$dayjs = dayjs
 
 app.mount('#app')

@@ -19,14 +19,14 @@ export default defineStore('cartStore',{
                 this.isLoading = false
             })
         },
-        addToCart (item) {
+        async addToCart (item) {
             this.isShow = true
             const api = `${import.meta.env.VITE_APP_API}api/${import.meta.env.VITE_APP_PATH}/cart`
             const cart = {
               product_id: item.id,
               qty: 1
             }
-            axios.post(api, { data: cart })
+            await axios.post(api, { data: cart })
               .then((res) => {
                 if(res.data.success){
                   this.getCartList()
@@ -38,13 +38,13 @@ export default defineStore('cartStore',{
               this.isShow = false
             },5000)
         },
-        changeCartQty(event,productId){
+        async changeCartQty(event,productId){
             const api = `${import.meta.env.VITE_APP_API}api/${import.meta.env.VITE_APP_PATH}/cart/${productId}`
             const setQty = {
                 product_id: productId,
                 qty: event.target.value * 1
             }
-            axios.put(api, { data: setQty })
+            await axios.put(api, { data: setQty })
               .then((res) => {
                 if(res.data.success){
                   this.getCartList()
@@ -54,9 +54,9 @@ export default defineStore('cartStore',{
                 
               })
         },
-        removeCart(productId){
+        async removeCart(productId){
             const api = `${import.meta.env.VITE_APP_API}api/${import.meta.env.VITE_APP_PATH}/cart/${productId}`
-            axios.delete(api) 
+            await axios.delete(api) 
               .then((res) => {
                 if(res.data.success){
                     this.getCartList()

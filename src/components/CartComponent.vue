@@ -32,7 +32,7 @@
       </div>
       <div>
         <div class="text-end mb-2">總金額 NT${{ currency(cartList.final_total) }}</div>
-        <a href="#" class="btn btn-outline-primary w-100" @click.prevent="">要結帳了嗎( • ̀ω•́ )</a>
+        <a href="#" class="btn btn-outline-primary w-100" @click.prevent="goToCheckout">要結帳了嗎( • ̀ω•́ )</a>
       </div>
     </div>
   </div>
@@ -53,7 +53,10 @@ export default {
     ...mapState(cartStore,['cartList','cartLen','isLoading'])
   },
   methods: {
-    ...mapActions(cartStore,['getCartList','changeCartQty','removeCart'])
+    ...mapActions(cartStore,['getCartList','changeCartQty','removeCart']),
+    goToCheckout(){
+      this.$router.push(`/shopping/createOrder`)
+    }
   },
   created() {
     this.getCartList()

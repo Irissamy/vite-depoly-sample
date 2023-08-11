@@ -41,13 +41,23 @@ const router = createRouter({
         },
         {
           path: 'beautyItem',
-          component: () => import('../views/shopping/beautyView.vue'),
+          component: () => import('../views/shopping/BeautyView.vue'),
         },
         {
           path: ':productCategory/:productId',
           name: 'productDatil',
-          component: () => import('../views/shopping/productView.vue')
+          component: () => import('../views/shopping/ProductView.vue')
         },
+        {
+          path: 'createOrder',
+          name: 'createOrder',
+          component: () => import('../views/shopping/CreateOrder.vue')
+        },
+        {
+          path: 'checkout/:orderId',
+          name: 'checkout',
+          component: () => import('../views/shopping/CheckoutView.vue')
+        }
       ]
     }
   ]

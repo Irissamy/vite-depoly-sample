@@ -25,7 +25,7 @@
                         </ul>
                     </li>
                 </ul>
-                <div class="nav-item dropdown pe-3">
+                <!-- <div class="nav-item dropdown pe-3">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Login</a>
                     <ul class="dropdown-menu">
                         <li><RouterLink to="/loginView" class="dropdown-item">使用者登入</RouterLink></li>
@@ -33,7 +33,7 @@
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="javascripts:;">login out</a></li>
                     </ul>
-                </div>
+                </div> -->
                 <div class="d-flex pe-3">
                     <a class="nav-link" href="#" @click.prevent="showCart">購物小車車</a>
                     <div class="cart" :class="{ 'cart--active': isCartShow }">
