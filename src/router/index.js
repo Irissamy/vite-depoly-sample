@@ -53,13 +53,26 @@ const router = createRouter({
           name: 'createOrder',
           component: () => import('../views/shopping/CreateOrder.vue')
         },
+      ]
+    },
+    {
+      path: '/checkout',
+      name: 'checkout',
+      component: () => import('../views/CheckoutView.vue'),
+      children: [
         {
-          path: 'checkout/:orderId',
-          name: 'checkout',
-          component: () => import('../views/shopping/CheckoutView.vue')
+          path: ':orderId',
+          name: 'checkoutId',
+          component: () => import('../views/checkout/CheckoutIdView.vue'),
+        },
+        {
+          path: 'checkoutAll',
+          name: 'checkoutAll',
+          component: () => import('../views/checkout/CheckoutAllView.vue')
         }
       ]
-    }
+    },
+    
   ]
 })
 

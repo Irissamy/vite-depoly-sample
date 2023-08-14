@@ -14,7 +14,7 @@
                         <RouterLink to="/about" class="nav-link">About</RouterLink>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">shopping</a>
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shopping</a>
                         <ul class="dropdown-menu">
                             <li><RouterLink to="/shopping/sweetItem" class="dropdown-item">甜甜的東西</RouterLink></li>
                             <li><RouterLink to="/shopping/furnitureItem" class="dropdown-item">舒服的家具</RouterLink></li>
@@ -23,6 +23,9 @@
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="javascripts:;">Something else here</a></li>
                         </ul>
+                    </li>
+                    <li class="nav-item">
+                        <RouterLink to="/checkout/checkoutAll" class="nav-link">Order</RouterLink>
                     </li>
                 </ul>
                 <!-- <div class="nav-item dropdown pe-3">

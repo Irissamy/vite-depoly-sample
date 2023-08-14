@@ -7,7 +7,32 @@
             </ol>
         </nav>
         <LoadingOverlay :active="isLoading"></LoadingOverlay>
-        <!-- 送出訂單表單 -->
+        <!-- 購物車列表 -->
+        <div class="my-5 d-flex flex-column align-items-center">
+            <div class="col-md-6 mb-4">
+                <table class="table align-middle">
+                    <thead>
+                    <th>品名</th>
+                    <th>數量</th>
+                    <th class="text-end">單價</th>
+                    </thead>
+                    <tbody>
+                    <tr v-for="el in cartList.carts" :key="el.id">
+                        <td>{{ el.product.title }}</td>
+                        <td>{{ el.qty }}</td>
+                        <td class="text-end">{{ currency(el.product.price) }}</td>
+                    </tr>
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <td colspan="2" class="text-end">總計</td>
+                        <td class="text-end">{{ currency(cartList.final_total) }}</td>
+                    </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+        <!-- 填寫購買資料 -->
         <div class="my-5 row justify-content-center">
             <V-Form class="col-md-6" v-slot="{ errors }" @submit="createOrder">
                 <div class="mb-3">
@@ -59,9 +84,14 @@
 </template>
 
 <script>
+import cartStore from '@/store/cartStore.js'
+import { mapActions,mapState } from 'pinia'
+import { currency } from '@/methods/filterFn.js'
+
 export default {
     data() {
         return{
+            currency,
             isLoading: false,
             form: {
                 user: {
@@ -74,14 +104,19 @@ export default {
             }
         }
     },
+    computed: {
+        ...mapState(cartStore,['cartList'])
+    },
     methods: {
+        ...mapActions(cartStore,['getCartList']),
         createOrder () {
             const api = `${import.meta.env.VITE_APP_API}api/${import.meta.env.VITE_APP_PATH}/order`
             const order = this.form
             this.$http.post(api, { data: order })
                 .then((res) => {
                 if (res.data.success) {
-                    this.$router.push(`/shopping/checkout/${res.data.orderId}`)
+                    this.getCartList()
+                    this.$router.push(`/checkout/${res.data.orderId}`)
                 } else {
                     console.log(res)
                 }
