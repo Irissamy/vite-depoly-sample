@@ -1,4 +1,5 @@
 <template>
+    <LoadingOverlay :active="isLoading"></LoadingOverlay>
     <div class="container">
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
@@ -43,11 +44,13 @@ export default {
     methods:{
         getOrder(page=1){
             const api = `${import.meta.env.VITE_APP_API}api/${import.meta.env.VITE_APP_PATH}/orders?page=${page}`
+            this.isLoading = true
             this.$http.get(api)
                 .then((res) => {
                     if (res.data.success) {
                         this.orderList = res.data.orders
                         this.pagination = res.data.pagination
+                        this.isLoading = false
                     }
                 })
         },

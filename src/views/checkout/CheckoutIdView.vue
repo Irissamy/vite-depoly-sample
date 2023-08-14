@@ -1,4 +1,5 @@
 <template>
+    <LoadingOverlay :active="isLoading"></LoadingOverlay>
     <div class="container">
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
@@ -79,12 +80,14 @@ export default {
         }
     },
     methods:{
-        async getOrder(){
+        getOrder(){
             const api = `${import.meta.env.VITE_APP_API}api/${import.meta.env.VITE_APP_PATH}/order/${this.orderId}`
-            await this.$http.get(api)
+            this.isLoading = true
+            this.$http.get(api)
                 .then((res) => {
                     if (res.data.success) {
                         this.orderInfo = res.data.order
+                        this.isLoading = false
                     } else {
                         console.log(res.data.message)
                     }
