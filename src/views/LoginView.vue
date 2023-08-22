@@ -49,11 +49,11 @@ export default {
       const api = `${import.meta.env.VITE_APP_API}admin/signin`
       this.$http.post(api, this.user)
         .then((res) => {
-          const { token, expired } = res.data
-          document.cookie = `hexToken=${token};${expired}`
           this.user.username = ''
           this.user.password = ''
           if (res.data.success) {
+            const { token, expired } = res.data
+            document.cookie = `hexToken=${token}; expires=${new Date(expired)}`
             this.$router.push('/')
           } else {
             alert(res.data.message)

@@ -13,10 +13,10 @@ export default defineStore('productStore',{
         }
     },
     actions: {
-      getProductList () {
+      async getProductList () {
           this.isLoading = true
           const api = `${import.meta.env.VITE_APP_API}api/${import.meta.env.VITE_APP_PATH}/products/all`
-          axios.get(api)
+          await axios.get(api)
             .then((res) => {
               this.products = res.data.products
               this.isLoading = false
