@@ -7,7 +7,6 @@
           <li class="breadcrumb-item active" aria-current="page">訂單總覽</li>
         </ol>
       </nav>
-      <LoadingOverlay :active="isLoading"></LoadingOverlay>
       <div class="container text-center">
         <div class="row py-2 bg-warning">
             <div class="col">訂單編號</div>
@@ -17,7 +16,7 @@
         </div>
         <div class="row py-2 border-bottom" v-for="item in orderList" :key="item.id">
             <a class="col bg-warning-subtle" href="#" @click.prevent="checkoutOrderId(item)">{{ item.id }}</a>
-            <div class="col">{{ $dayjs(item.create_at).format('YYYY-MM-DD') }}</div>
+            <div class="col">{{ $dayjs(item.create_at * 1000).format('YYYY-MM-DD') }}</div>
             <div class="col">
                 <span v-if="item.is_paid === true" class="text-success">付款完成</span>
                 <span v-else class="text-danger">尚未付款</span>

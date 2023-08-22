@@ -7,7 +7,6 @@
           <li class="breadcrumb-item active" aria-current="page">訂單單筆</li>
         </ol>
       </nav>
-      <LoadingOverlay :active="isLoading"></LoadingOverlay>
       <div class="my-5 d-flex flex-column align-items-center">
         <div class="col-md-6 mb-4">
             <div class="cart-list">
@@ -19,20 +18,26 @@
                         alt=""
                         />
                     </div>
-                    <div class="col-10 align-items-center">
+                    <div class="col-4 align-items-center">
+                        <div class="text-secondary">商品</div>
                         <div class="pb-2">{{ el.product.title }}</div>
-                        <div class="d-flex align-items-center">
-                        <div>{{ el.qty }}</div>
-                        <i class="bi bi-x"></i>
-                        <div class="text-nowrap cart__item-price">${{ currency(el.product.price) }}</div>
-                        </div>
+                    </div> 
+                    <div class="col-3 align-items-center">
+                        <div class="text-center text-secondary">數量</div>
+                        <div class="text-center">{{ el.qty }}</div>
+                    </div> 
+                    <div class="col-3 align-items-center justify-content-end">
+                        <div class="text-center text-secondary">小計</div>
+                        <div class="text-center text-nowrap cart__item-price" :class="{ 'text-decoration-line-through': el.coupon }">${{ currency(el.product.price) }}</div>
+                        <div v-if="el.coupon" class="text-center text-nowrap cart__item-price ps-2">${{ currency(el.final_total) }}</div>
                     </div> 
                 </div>
             </div>
-            <div>
-                <div class="text-end mb-2">總金額 NT${{ currency(orderInfo.total) }}</div>
+            <div class="d-flex">
+                <div v-if="couponCode !== ''">使用折扣碼<span class="ps-2 fw-bolder">{{ couponCode }}</span></div>
+                <div class="text-end fw-bolder mb-2 ms-auto">總金額 NT${{ currency(orderInfo.total) }}</div>
             </div>
-            <table class="table">
+            <table class="table mt-4">
                 <tbody>
                 <tr>
                     <th width="100">Email</th>
@@ -59,6 +64,10 @@
                 </tr>
                 </tbody>
             </table>
+            <div class="text-end">
+                <router-link to="/checkout/checkoutAll" class="btn btn-success me-2">查看全部訂單</router-link>
+                <button v-if="orderInfo.is_paid === false" class="btn btn-danger" @click="checkoutPay">確認付款</button>
+            </div>
         </div>
       </div>
     </div>
@@ -75,7 +84,7 @@ export default {
             orderInfo: {
                 user:{}
             },
-            paginaition: {}, 
+            couponCode: '',
             isLoading: false
         }
     },
@@ -87,7 +96,20 @@ export default {
                 .then((res) => {
                     if (res.data.success) {
                         this.orderInfo = res.data.order
+                        this.couponCode = (Object.values(this.orderInfo.products)[0].coupon) ? (Object.values(this.orderInfo.products)[0].coupon.code) : ''
                         this.isLoading = false
+                    } else {
+                        console.log(res.data.message)
+                    }
+                })
+        },
+        checkoutPay(){
+            const api =  `${import.meta.env.VITE_APP_API}api/${import.meta.env.VITE_APP_PATH}/pay/${this.orderId}`
+            this.isLoading = true
+            this.$http.post(api,this.orderId)
+                .then((res) => {
+                    if(res.data.success){
+                        this.getOrder()
                     } else {
                         console.log(res.data.message)
                     }

@@ -29,3 +29,14 @@
         height:100px;
     }
 }
+
+.pay-card{
+    text-decoration: none;
+    &:hover{
+        border:1px solid #fff3cd;
+    }
+    &--active{
+        border:1px solid #ffc009;
+        color:#ffc009;
+    }
+}
